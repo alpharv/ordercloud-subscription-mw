@@ -14,7 +14,6 @@ interface SubscriptionRequest {
 export async function POST(request: NextRequest) {
     try {
         const subscriptionDataRequest: SubscriptionRequest = await request.json();
-
         // TODO: Validate incoming request for security and data integrity.
 
         if (isNotification(subscriptionDataRequest.OrderWorksheet)) {
@@ -27,8 +26,13 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ HttpStatusCode: 200, UnhandledErrorBody: "" }, { status: 200 });
     } catch (error) {
+        let message;
+        if (error instanceof Error)
+            message = error.message
+        else
+            message = String(error);
         console.error("Error processing request:", error);
-        return NextResponse.json({ HttpStatusCode: 500, UnhandledErrorBody: error.message }, { status: 500 });
+        return NextResponse.json({ HttpStatusCode: 500, UnhandledErrorBody: message }, { status: 500 });
     }
 }
 
