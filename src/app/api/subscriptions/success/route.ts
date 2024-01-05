@@ -1,21 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { OrderWorksheet } from "ordercloud-javascript-sdk";
-
-interface SubscriptionRequest {
-    Environment: string;
-    OrderCloudAccessToken: string;
-    OrderWorksheet: OrderWorksheet;
-    UnavailableProductIDs: string[];
-    ErrorCode: string;
-}
+import { SubscriptionRequest } from "./../../../../types/SubscriptionRequest";
 
 // Read this for base information on the integration calls from OrderCloud to the middleware:
 // https://ordercloud.io/knowledge-base/subscriptions
+// This is being called if it's a success.
 export async function POST(request: NextRequest) {
     try {
         const subscriptionDataRequest: SubscriptionRequest = await request.json();
         // TODO: Validate incoming request for security and data integrity.
-
         if (isNotification(subscriptionDataRequest.OrderWorksheet)) {
             // This is a notification request. Send a notification to the user.
             await sendNotification(subscriptionDataRequest.OrderWorksheet);
@@ -61,13 +54,12 @@ function isNotification(wrksheet: OrderWorksheet): boolean {
 // Send a notification to the user that a subscription order is about to be created.
 async function sendNotification(wrksheet: OrderWorksheet) {
     console.log("Sending notification. OrderID:", wrksheet.Order?.ID, "SubscriptionID:", wrksheet.Subscription?.ID);
-
     // TODO: Implement notification logic.
 }
 
 // Create the subscription order.
+// Subscription orders are created by OrderCloud, but you have to handle various actions and finalize the order (SUBMITTED).
 async function createSubscriptionOrder(wrksheet: OrderWorksheet) {
     console.log("Creating subscription order. OrderID:", wrksheet.Order?.ID, "SubscriptionID:", wrksheet.Subscription?.ID);
-
     // TODO: Implement order creation logic.
 }
