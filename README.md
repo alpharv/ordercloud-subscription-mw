@@ -18,7 +18,7 @@ According to the documentations its following there rules:
 
 You need to setup this Subscription Integration. You do that on the ordercloud portal or using the API. 
 As an example it could look like this:
-
+```
 {
 	"ApiClientID": "---some-ApiClientId---",
 	"HashKey": "---some-hash-key---",
@@ -28,7 +28,7 @@ As an example it could look like this:
 	"Url": "https://3940-108-5-123-41.ngrok-free.app/api/subscriptions",
 	"xp": null
 }
-
+```
 This example shows a call back to ngrok [https://wwww.ngrok.com] that makes it easy to expose an endpoint locally as an public endpoint. 
 Very usefull for developing a features like this from you local dev machine. 
 
