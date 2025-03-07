@@ -29,7 +29,7 @@ As an example it could look like this:
 	"xp": null
 }
 ```
-This example shows a call back to ngrok [https://wwww.ngrok.com] that makes it easy to expose an endpoint locally as an public endpoint. 
+This example shows a call back to ngrok [https://ngrok.com] that makes it easy to expose an endpoint locally as an public endpoint. 
 Very usefull for developing a features like this from you local dev machine. 
 
 Sitecore OrderCloud will perform these calls following the above rules, and with an ngrok running locally the request will end up as a request to your local node server, e.g. at localhost:3000. 
